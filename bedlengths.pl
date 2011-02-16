@@ -1,24 +1,28 @@
 #! /usr/bin/perl
 ####################
-# intersect.pl - intersectBed a number of times
+# bedlengths.pl - calc lengths of bed elements, sum 
 # By Madelaine Gogol 
-# 2/2011
+# 7/2003
 ####################
 
-@filenames = @ARGV;
-#first one being "control" to compare everything to.
+use strict;
+use POSIX;
+my ($contents, @lines,$filename,$chr1,$st1,$end1,$chr2,$st2,$end2,$midpoint1,$midpoint2,$dist);
+my ($length);
 
-$control = $ARGV[0];
+$filename = $ARGV[0];
 
-shift(@filenames);
+my $total = 0;
+$contents = get_file_data($filename);
+@lines = split('\n',$contents);
 
-
-foreach my $file (@filenames)
+foreach my $line (@lines)
 {
-	$intersect = `intersectBed -a $file -b $control -c | wc -l`;
-	$numpeaks = `wc -l $file`;
+	($chr1,$st1,$end1) = split('\t',$line);
 
-	print "$file $control $intersect $numpeaks\n";
+	$length = $end1-$st1;
+
+	print "$chr1\t$st1\t$end1\t$length\n";
 }
 
 ######################################################    
