@@ -1,4 +1,0 @@
-id1	thing1 thing2 thing3
-id2	thing4
-id3	thing5 thing6 thing7
-id4	thing8
