@@ -1,0 +1,4 @@
+
+Mon May  7 14:55:52 CDT 2007
+
+chreejt.fa is a made-up chromosome from /n/facility/Bioinformatics/analysis/Blanchette/ArrayDesignDrosophila/design/EEJT.fa using /home/mcm/utilities/concatfasta.pl to concatenate all the junctions together with 50 N's between each one. It is used to prevent AOS from designing probes that match the junction regions.
