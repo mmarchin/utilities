@@ -2,11 +2,9 @@
 ####################
 # bedlengths.pl - calc lengths of bed elements, sum 
 # By Madelaine Gogol 
-# 7/2003
 ####################
 
 use strict;
-use POSIX;
 my ($contents, @lines,$filename,$chr1,$st1,$end1,$chr2,$st2,$end2,$midpoint1,$midpoint2,$dist);
 my ($length);
 

@@ -6,7 +6,6 @@
 ####################
 
 use strict;
-use POSIX;
 my ($start,$end,$chr,$midpoint,$filename,@columns,@lines,$contents,@items,$col,$i);
 my ($value);
 

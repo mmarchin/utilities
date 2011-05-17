@@ -1,6 +1,6 @@
 #! /usr/bin/perl
 ####################
-# modcol.pl - add 30 to a column. 
+# modcol.pl - modify a column. 
 # By Madelaine Gogol 
 # 7/2003
 ####################

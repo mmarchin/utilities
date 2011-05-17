@@ -8,9 +8,6 @@
 
 use strict;
 
-# to convert fasta first, use VI.
-
-# %s/\(>.*\)\n/\1^I/g
 my ($new_annotation,$filename,$contents,@lines,$label,$id,$sequence);
 $filename = $ARGV[0];
 $new_annotation = $ARGV[1];

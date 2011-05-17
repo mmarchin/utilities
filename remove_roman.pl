@@ -6,7 +6,7 @@
 ###########################################################
 
 use strict;
-use Roman; #roman numerals! perl is amazing.
+use Roman;
 use DBI;
 use lib "/home/mcm/";
 use Locations;
@@ -16,37 +16,25 @@ my $contents = get_file_data($ARGV[0]);
 @lines = split('\n',$contents); 
 foreach my $line (@lines)
 {
-	#print "$line\n";
 	if($line =~ /^chr(\S+).*/)
 	{
-		#print "\nbefore:$line\n";
 		$chrom = $1;
 		if(isroman($chrom)) # and $chrom != "X") #chrX / chr10! ugh. In yeast, I guess chrX is chr10, but not in other orgs.
 		{
-			#print "roman:$chrom\n";
 			$newchrom = arabic($chrom);
-			#print "$newchrom:";
-		}
-		else
-		{
-			#print "noroman:$chrom\n";
 		}
 		if($newchrom)
 		{
 			$line =~ s/chr$chrom/chr$newchrom/;
 			print "$line\n";
-			#print "afterchange:$line\n";
 		}
 		else
 		{
-			#print "$chrom\n";
 			print "$line\n";
-			#print "afternochange:$line\n";
 		}
 	}
 	else
 	{
-		#line didn't start with "chrI"...
 		print "$line\n";
 	}
 }

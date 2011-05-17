@@ -4,7 +4,7 @@
 # 10/22/2009
 # based on splitter with a simple threshold.
 # Example call: perl mysplitter.pl mytrack.wig 10 300 2
-# where 10 is minrun, 300 is maxgap, 2 is threshold.
+# where 10 is minrun, 300 is maxgap, 2 is threshold (threshold can also be given as percentile like 95pct).
 
 use File::Basename;
 use POSIX;

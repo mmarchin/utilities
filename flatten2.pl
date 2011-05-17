@@ -1,6 +1,6 @@
 #! /usr/bin/perl
 ####################
-# flatten.pl - given fasta format file >id|chrom|start|end \n sequence
+# flatten.pl - given fasta format file >id \n sequence
 # outputs id\tsequence. 
 # uses Bioperl
 # By Madelaine Marchin

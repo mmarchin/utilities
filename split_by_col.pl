@@ -12,15 +12,12 @@ use Locations;
 
 my $contents = get_file_data($ARGV[0]);
 my $column = $ARGV[1];
-parse_and_save($ARGV[0],$contents,$column);
+splitcol($ARGV[0],$contents,$column);
 
 ######################################################
-# subroutine parse_and_save
-# arguments: file contents
-# purpose: parses contents and inserts into proper tables.
-# returns nothing
+# subroutine splitcol
 ######################################################
-sub parse_and_save
+sub splitcol
 {
 	my ($file,$contents,$column) = @_; 
 	my $current = 0;
