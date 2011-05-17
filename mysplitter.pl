@@ -41,7 +41,7 @@ if (@ARGV)
 		$threshold = sprintf("%.2f",$result);
 		`rm $file.sort`;
 		open(BED,">peaks_$shortfile.$minrun.$maxgap.$threshold.$orig.bed");
-	print BED "track name=peaks_$shortfile.$minrun.$maxgap.$threshold.$orig useScore=1 priority=2\n";
+		print BED "track name=peaks_$shortfile.$minrun.$maxgap.$threshold.$orig useScore=1 priority=2\n";
 	}
 	else
 	{

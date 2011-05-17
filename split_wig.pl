@@ -28,7 +28,10 @@ foreach my $line (@lines)
 	}
 	else
 	{
-		print OUT "$line\n";
+		if($line ne "")
+		{
+			print OUT "$line\n";
+		}
 	}
 }
 ######################################################    

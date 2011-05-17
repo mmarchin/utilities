@@ -1,31 +1,37 @@
 #! /usr/bin/perl
 ####################
-# bedlengths.pl - calc lengths of bed elements, sum 
+# bedtss.pl - go from chrom start end name score strand to tss (depends on strand).
 # By Madelaine Gogol 
-# 7/2003
+# 5/2011
 ####################
 
 use strict;
 use POSIX;
-my ($contents, @lines,$filename,$chr1,$st1,$end1,$chr2,$st2,$end2,$midpoint1,$midpoint2,$dist);
-my ($length);
+my ($start,$end,$chr,$midpoint,$filename,@columns,@lines,$contents,@items,$col,$i);
+my ($value);
 
 $filename = $ARGV[0];
 
-my $total = 0;
 $contents = get_file_data($filename);
 @lines = split('\n',$contents);
 
 foreach my $line (@lines)
 {
-	($chr1,$st1,$end1) = split('\t',$line);
+	@items = split('\t',$line);
 
-	$length = $end1-$st1;
-
-	print "$chr1\t$st1\t$end1\t$length\n";
-
-	#if using ensembl, make sure to add 1 to length! UCSC is 0-based.
+	if($items[5] eq "+")
+	{
+		$end = $items[1]+1;
+		print "$items[0]\t$items[1]\t$end\t$items[3]\t$items[4]\t$items[5]\n";
+	}
+	elsif($items[5] eq "-")
+	{
+		$start = $items[2]-1;
+		print "$items[0]\t$start\t$items[2]\t$items[3]\t$items[4]\t$items[5]\n";
+	}
 }
+
+
 
 ######################################################    
 # subroutine get_file_data
