@@ -1,11 +1,11 @@
 #! /usr/bin/perl
 ####################
-# bedlengths.pl - calc lengths of bed elements, sum 
+# keeplongestbed.pl - calc lengths of bed elements, keep longest with a given name
 # By Madelaine Gogol 
 ####################
 
 use strict;
-my ($r,@rest,$contents, @lines,$filename,$chr1,$st1,$end1,$chr2,$st2,$end2,$midpoint1,$midpoint2,$dist);
+my ($strand,$name,%h,$contents,$score, @lines,$filename,$chrom,$start,$end);
 my ($length);
 
 $filename = $ARGV[0];
@@ -16,14 +16,37 @@ $contents = get_file_data($filename);
 
 foreach my $line (@lines)
 {
-	($chr1,$st1,$end1,@rest) = split('\t',$line);
+	($chrom,$start,$end,$name,$score,$strand) = split('\t',$line);
 
-	$length = $end1-$st1;
+	$length = $end-$start;
 
-	$r = join("\t",@rest);
-	print "$chr1\t$st1\t$end1\t$length\t$r\n";
+	if(exists($h{$name}))
+	{
+		if($h{$name}{length} < $length)
+		{
+			$h{$name}{chrom} = $chrom;
+			$h{$name}{start} = $start; 
+			$h{$name}{end} = $end;
+			$h{$name}{strand} = $strand; 
+			$h{$name}{score} = $score; 
+			$h{$name}{length} = $end;
+		}
+	}
+	else
+	{
+		$h{$name}{chrom} = $chrom;
+		$h{$name}{start} = $start; 
+		$h{$name}{end} = $end;
+		$h{$name}{strand} = $strand; 
+		$h{$name}{score} = $score; 
+		$h{$name}{length} = $end;
+	}
 
-	#if using ensembl, make sure to add 1 to length! UCSC is 0-based.
+}
+
+foreach my $n (keys %h)
+{
+	print "$h{$n}{chrom}\t$h{$n}{start}\t$h{$n}{end}\t$n\t$h{$n}{score}\t$h{$n}{strand}\n";
 }
 
 ######################################################    
