@@ -6,7 +6,7 @@
 ####################
 
 use strict;
-my ($contents, @lines,$filename,$chr1,$st1,$end1,$chr2,$st2,$end2,$midpoint1,$midpoint2,$dist);
+my ($contents, @lines,$filename,$chr1,$st1,$name,$score,$strand,$end1,$chr2,$st2,$end2,$midpoint1,$midpoint2,$dist);
 my ($length);
 
 $filename = $ARGV[0];
@@ -18,13 +18,13 @@ my $filt = $ARGV[1];
 
 foreach my $line (@lines)
 {
-	($chr1,$st1,$end1) = split('\t',$line);
+	($chr1,$st1,$end1,$name,$score,$strand) = split('\t',$line);
 
 	$length = $end1-$st1;
 
 	if($length > $filt)
 	{
-		print "$chr1\t$st1\t$end1\n";
+		print "$chr1\t$st1\t$end1\t$name\t$score\t$strand\n";
 	}
 
 	#if using ensembl, make sure to add 1 to length! UCSC is 0-based.
