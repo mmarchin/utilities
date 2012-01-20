@@ -19,9 +19,13 @@ foreach my $line (@lines)
 	if($line =~ /^chr(\S+).*/)
 	{
 		$chrom = $1;
-		if(isroman($chrom)) # and $chrom != "X") #chrX / chr10! ugh. In yeast, I guess chrX is chr10, but not in other orgs.
+		if(isroman($chrom) and $chrom ne "M") # and $chrom != "X") #chrX / chr10! ugh. In yeast, I guess chrX is chr10, but not in other orgs. Also, chrM is not chr1000. How funny/terrible.
 		{
 			$newchrom = arabic($chrom);
+		}
+		else
+		{
+			$newchrom = $chrom;
 		}
 		if($newchrom)
 		{
