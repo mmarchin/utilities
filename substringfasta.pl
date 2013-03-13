@@ -1,6 +1,6 @@
 #! /usr/bin/env perl
 ####################
-# substringfasta.pl - given fasta format file, start, and length, return substring for each element.
+# substringfasta.pl - given fasta format file, name, start, and length, return substring for each element.
 # uses Bioperl
 # By Madelaine Gogol
 # 4/2011

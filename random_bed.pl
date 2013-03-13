@@ -44,7 +44,7 @@ $Rcommand = "cat ~/utilities/get_chroms.R | R --slave --args $numchrom $j @chrom
 srand(time ^ $$);
 for(my $i = 0; $i < $j; $i++)
 {
-	$start = int(rand($chrom_length[$chromindexes[$i]]));
+	$start = int(rand($chrom_length[$chromindexes[$i]]-$length[$i]));
 	$end = $start + $length[$i];
 	print "$chrom[$chromindexes[$i]]\t$start\t$end\n";
 }

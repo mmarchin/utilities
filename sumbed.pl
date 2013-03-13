@@ -1,6 +1,6 @@
 #! /usr/bin/perl
 ####################
-# bedlengths.pl - calc lengths of bed elements, sum 
+# sumbed.pl - calc lengths of bed elements, sum 
 # By Madelaine Gogol 
 # 7/2003
 ####################
@@ -21,7 +21,8 @@ foreach my $line (@lines)
 {
 	($chr1,$st1,$end1,$name,$score,$strand) = split('\t',$line);
 
-	$sum = $sum + $score;
+	#$sum = $sum + $score;
+	$sum = $sum + ($end1-$st1);
 
 	#if using ensembl, make sure to add 1 to length! UCSC is 0-based.
 }
