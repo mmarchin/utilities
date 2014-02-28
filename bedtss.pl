@@ -20,13 +20,15 @@ foreach my $line (@lines)
 
 	if($items[5] eq "+")
 	{
-		$end = $items[1]+1;
-		print "$items[0]\t$items[1]\t$end\t$items[3]\t$items[4]\t$items[5]\n";
+		$start = $items[1]-1;
+		$end = $items[1];
+		print "$items[0]\t$start\t$end\t$items[3]\t$items[4]\t$items[5]\n";
 	}
 	elsif($items[5] eq "-")
 	{
-		$start = $items[2]-1;
-		print "$items[0]\t$start\t$items[2]\t$items[3]\t$items[4]\t$items[5]\n";
+		$start = $items[2];
+		$end = $items[2]+1;
+		print "$items[0]\t$start\t$end\t$items[3]\t$items[4]\t$items[5]\n";
 	}
 }
 

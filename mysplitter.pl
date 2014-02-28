@@ -9,11 +9,10 @@
 use File::Basename;
 use POSIX;
 
-my ($overallthresh,$peakid,$chrom, $build, $threshold,$file,$minrun,$maxgap);
+my ($pos_of_value_above_threshold,$overallthresh,$peakid,$chrom, $build, $threshold,$file,$minrun,$maxgap);
 
 
 
-open(LOG,">mysplitter.log");
 
 if (@ARGV) 
 {
@@ -21,6 +20,7 @@ if (@ARGV)
 
 	$shortfile = basename($file);
 	$shortfile =~s/\.wig//g;
+	open(LOG,">mysplitter.$shortfile.log");
 	print LOG "file: $file\nminrun: $minrun\nmaxgap: $maxgap\nthreshold $threshold\n";
 
 
@@ -83,6 +83,7 @@ while (<IN>)
 				push(@mypeakstarts,$start);
 				push(@mypeakends,$end);
 				push(@mypeakvals,$value);
+				$pos_of_value_above_threshold = $end;
 				print LOG "starting peak $chrom $start $value $endpoint\n";
 				$build = 1;
 			}
@@ -101,6 +102,7 @@ while (<IN>)
 					push(@mypeakstarts,$start);
 					push(@mypeakends,$end);
 					push(@mypeakvals,$value);
+					$pos_of_value_above_threshold = $end;
 				}
 				if($start >= $endpoint)
 				{
@@ -122,7 +124,8 @@ while (<IN>)
 						#calculate
 						if($peakval > $overallthresh)
 						{
-							print BED "$last_chrom\t$mypeakstarts[0]\t$mypeakends[$#mypeakends]\t$peakid\t$peakval\n";
+							$tempend = $pos_of_value_above_threshold;
+							print BED "$last_chrom\t$mypeakstarts[0]\t$tempend\t$peakid\t$peakval\n";
 							$peakid++;
 						}
 					}
@@ -137,6 +140,7 @@ while (<IN>)
 					push(@mypeakstarts,$start);
 					push(@mypeakends,$end);
 					push(@mypeakvals,$value);
+					$pos_of_value_above_threshold = $end;
 				}
 			}
 			elsif($build == 1 and $value <= $threshold)
@@ -159,7 +163,8 @@ while (<IN>)
 						$peakval = median(@mypeakvals) * 1000;
 						if($peakval > $overallthresh)
 						{
-							print BED "$last_chrom\t$mypeakstarts[0]\t$mypeakends[$#mypeakends]\t$peakid\t$peakval\n";
+							$tempend = $pos_of_value_above_threshold;
+							print BED "$last_chrom\t$mypeakstarts[0]\t$tempend\t$peakid\t$peakval\n";
 							$peakid++;
 						}
 					}
@@ -186,7 +191,8 @@ while (<IN>)
 					$peakval = median(@mypeakvals) * 1000;
 					if($peakval > $overallthresh)
 					{
-						print BED "$last_chrom\t$mypeakstarts[0]\t$mypeakends[$#mypeakends]\t$peakid\t$peakval\n";
+						$tempend = $pos_of_value_above_threshold;
+						print BED "$last_chrom\t$mypeakstarts[0]\t$tempend\t$peakid\t$peakval\n";
 						$peakid++;
 					}
 				}
@@ -200,6 +206,7 @@ while (<IN>)
 				push(@mypeakstarts,$start);
 				push(@mypeakends,$end);
 				push(@mypeakvals,$value);
+				$pos_of_value_above_threshold = $end;
 			}
 			elsif($build == 1 and $value <= $threshold)
 			{
@@ -209,7 +216,8 @@ while (<IN>)
 					$peakval = median(@mypeakvals) * 1000;
 					if($peakval > $overallthresh)
 					{
-						print BED "$last_chrom\t$mypeakstarts[0]\t$mypeakends[$#mypeakends]\t$peakid\t$peakval\n";
+						$tempend = $pos_of_value_above_threshold;
+						print BED "$last_chrom\t$mypeakstarts[0]\t$tempend\t$peakid\t$peakval\n";
 						$peakid++;
 					}
 				}
@@ -228,6 +236,7 @@ while (<IN>)
 				push(@mypeakstarts,$start);
 				push(@mypeakends,$end);
 				push(@mypeakvals,$value);
+				$pos_of_value_above_threshold = $end;
 				$build = 1;
 			}
 			elsif($build == 0 and $value <= $threshold)

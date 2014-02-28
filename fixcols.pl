@@ -1,7 +1,6 @@
 #! /usr/bin/perl
 ####################
 # fixcols.pl - given wig type file fix start > end
-# uses Bioperl
 # By Madelaine Gogol 
 # 4/29/2008
 ####################
